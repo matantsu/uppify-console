@@ -1,0 +1,36 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-title>
+        Sign in
+      </ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <button ion-button icon-left full (click)="fb()" padding style="background-color: #3b5998;">
+          <ion-icon name="logo-facebook"></ion-icon>
+          Login with facebook
+        </button>
+        <button ion-button icon-left full (click)="gp()" padding style="background-color: #d34836;">
+          <ion-icon name="logo-google"></ion-icon>
+          Login with google
+        </button>
+        <button ion-button icon-left full (click)="tw()" padding style="background-color: #00aced;">
+          <ion-icon name="logo-twitter"></ion-icon>
+          Login with twitter
+        </button>
+        <ion-item-divider text-center>OR</ion-item-divider>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <button ion-button full color="primary" (click)="withEmail()">Sign in</button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

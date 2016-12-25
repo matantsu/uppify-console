@@ -1,0 +1,20 @@
+
+page-sign-in {
+  .scroll-content{
+    background-color: #eee;
+  }
+
+  @media (min-width: 1200px) {
+    .scroll-content{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .card{
+      margin: auto;
+      width:400px;
+    }
+  }
+}

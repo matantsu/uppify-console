@@ -1,0 +1,58 @@
+<ion-menu color="primary" [content]="nav" [ngClass]="{'menu': isMenuEnabled()}" [enabled]="isMenuEnabled()" [swipeEnabled]="!platform.is('core')">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Uppify</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
+          <ion-icon name="home"></ion-icon>
+          Dashboard
+        </button>
+      <ion-list-header>
+        Manage
+      </ion-list-header>
+        <button ion-item icon-left (click)="navigate(BasicInfoPage)" menuClose [disabled]="nav?.getActive()?.component == BasicInfoPage">
+          <ion-icon name="information-circle"></ion-icon>
+          Basic Info
+        </button>
+        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
+          <ion-icon name="brush"></ion-icon>
+          Theme & Styling
+        </button>
+      <ion-list-header>
+        Grow
+      </ion-list-header>
+        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
+          <ion-icon name="paper"></ion-icon>
+          Feed
+        </button>
+      <ion-list-header>
+        Earn
+      </ion-list-header>
+        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
+          <ion-icon name="cart"></ion-icon>
+          Products
+        </button>
+        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
+          <ion-icon name="briefcase"></ion-icon>
+          Services
+        </button>
+        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
+          <ion-icon name="trending-up"></ion-icon>
+          Sales
+        </button>
+
+      <ion-item (click)="logout()">
+        <ion-avatar item-left>
+          <img [src]="(af.auth | async)?.auth?.photoURL">
+        </ion-avatar>
+        <h2>{{(af.auth | async)?.auth?.displayName}}</h2>
+        <p>{{(af.auth | async)?.auth?.email}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav class="main-nav" #nav [root]="rootPage"></ion-nav>

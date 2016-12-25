@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>dashboard</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content padding>
+  <div class="demo-box" padding>
+    <ion-segment [(ngModel)]="platform">
+      <ion-segment-button [value]="'ios'">
+        ios
+      </ion-segment-button>
+      <ion-segment-button [value]="'md'">
+        Android
+      </ion-segment-button>
+      <ion-segment-button [value]="'wp'">
+        Windows
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="demo" [ngClass]="platform">
+      <uppify-app [appId]="(af.auth | async).auth.uid" [platform]="platform"></uppify-app>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,5 @@
+<div class="upload-area" [uploader]="uploader" ng2FileDrop ng2FileSelect (fileOver)="onFileOver($event)">
+  {{fileOver ? 'drop it !' : 'file drop zone'}}
+  {{progress}}
+  <img [src]="downloadUrl + '&q=' + index" alt="">
+</div>

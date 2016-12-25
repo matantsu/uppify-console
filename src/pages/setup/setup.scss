@@ -1,0 +1,28 @@
+
+page-setup {
+  .scroll-content{
+    background-color: #eee;
+  }
+
+  @media (min-width: 1200px) {
+    .scroll-content{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .card{
+      margin: auto;
+      width:700px;
+    }
+  }
+
+  .theme-preview{
+    margin: auto;
+    width: 233.5px;
+    height: 400px;
+    background: url('../../assets/img/devices-sprite.jpg') center top no-repeat;
+    background-size: 233.5px;
+  }
+}

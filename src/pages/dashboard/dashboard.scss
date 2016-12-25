@@ -1,0 +1,44 @@
+page-dashboard {
+  uppify-app{
+    position: relative;
+  }
+
+
+  .demo{
+    width: 467px;
+    height: 800px;
+    background: url('../../assets/img/devices-sprite.jpg') center top no-repeat;
+    background-size: 467px;
+
+    &.ios{
+      uppify-app ion-nav{
+        margin-top: 85px !important;
+        margin-left: 74px !important;
+        width: 320px !important;
+        height: 568px !important;
+      }
+    }
+
+    &.md{
+      background-position: center center;
+
+      uppify-app ion-nav{
+        margin-top: 64px !important;
+        margin-left:54px !important;
+        width: 360px !important;
+        height: 590px !important;
+      }
+    }
+
+    &.wp{
+      background-position: center bottom;
+
+      uppify-app ion-nav{
+        margin-top: 72px !important;
+        margin-left:58px !important;
+        width: 350px !important;
+        height: 622px !important;
+      }
+    }
+  }
+}
