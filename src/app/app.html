@@ -13,9 +13,9 @@
       <ion-list-header>
         Manage
       </ion-list-header>
-        <button ion-item icon-left (click)="navigate(BasicInfoPage)" menuClose [disabled]="nav?.getActive()?.component == BasicInfoPage">
+        <button ion-item icon-left (click)="navigate(BusinessInfoPage)" menuClose [disabled]="nav?.getActive()?.component == BusinessInfoPage">
           <ion-icon name="information-circle"></ion-icon>
-          Basic Info
+          Business Info
         </button>
         <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
           <ion-icon name="brush"></ion-icon>
@@ -46,10 +46,10 @@
 
       <ion-item (click)="logout()">
         <ion-avatar item-left>
-          <img [src]="(af.auth | async)?.auth?.photoURL">
+          <img [src]="currentUser?.photoUrl">
         </ion-avatar>
-        <h2>{{(af.auth | async)?.auth?.displayName}}</h2>
-        <p>{{(af.auth | async)?.auth?.email}}</p>
+        <h2>{{currentUser?.displayName}}</h2>
+        <p>{{currentUser?.email}}</p>
       </ion-item>
     </ion-list>
   </ion-content>

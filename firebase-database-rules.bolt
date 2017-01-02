@@ -1,0 +1,8 @@
+// this file defines the DB scheme we use in this project.
+// use this command to compile: `> firebase-bolt < firebase-database-rules.bolt > firebase-database-rules.json`
+// and then upload to firebase.
+
+path / {
+  read() { true }
+  write() { true }
+}

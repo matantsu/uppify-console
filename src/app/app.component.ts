@@ -6,27 +6,32 @@ import {AngularFire} from "angularfire2/index";
 import {SignInPage} from "../pages/sign-in/sign-in";
 import {SetupPage} from "../pages/setup/setup";
 import {DashboardPage} from "../pages/dashboard/dashboard";
-import {BasicInfoPage} from "../pages/basic-info/basic-info";
+import {BusinessInfoPage} from "../pages/business-info/business-info";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Rx";
+import {AuthService, User} from "../bl/auth-service";
+import {AppService} from "../bl/app-service";
+import {ConnectivityService} from "../bl/connectivity-service";
+import {NoConnectionPage} from "../pages/no-connection/no-connection";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class UppifyConsole implements AfterViewInit{
+  currentUser: User;
+
   @ViewChild('nav') nav: NavController;
   rootPage = SignInPage;
 
   DashboardPage = DashboardPage;
-  BasicInfoPage = BasicInfoPage;
+  BusinessInfoPage = BusinessInfoPage;
   private loading;
 
-  constructor(public af: AngularFire, private platform: Platform,public loadingCtrl: LoadingController) {
+  constructor(private authService: AuthService, private af: AngularFire, private platform: Platform,public loadingCtrl: LoadingController, private connectivityService: ConnectivityService) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
-
   }
 
   ngAfterViewInit(){
@@ -35,15 +40,18 @@ export class UppifyConsole implements AfterViewInit{
     });
     this.loading.present();
 
-    this.af.auth.flatMap(a=>a ?
-      this.af.database.object('defs/' + a.auth.uid, { preserveSnapshot: true })
-        .map(d=> d.val() ? DashboardPage : SetupPage)
-      : Observable.of(SignInPage))
-    .subscribe(a=>this.navigate(a));
+    this.connectivityService.onConnectionStatusChanged()
+      .flatMap(connection=>{
+        if(connection)
+          return this.authService.changes().map(user=>user ? DashboardPage : SignInPage);
+        else
+          return Observable.of(NoConnectionPage);
+      })
+      .subscribe(page=>this.navigate(page));
   }
 
   logout(){
-    this.af.auth.logout();
+    this.authService.logout();
   }
 
   navigate(page){
@@ -61,6 +69,7 @@ export class UppifyConsole implements AfterViewInit{
     return this.nav &&
       this.nav.getActive() &&
       this.nav.getActive().component != SignInPage &&
-      this.nav.getActive().component != SetupPage;
+      this.nav.getActive().component != SetupPage &&
+      this.nav.getActive().component != NoConnectionPage;
   }
 }

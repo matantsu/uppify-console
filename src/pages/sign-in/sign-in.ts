@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, Platform} from 'ionic-angular';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import {AuthService} from "../../bl/auth-service";
 
-/*
-  Generated class for the SignIn page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-sign-in',
   templateUrl: 'sign-in.html'
@@ -15,33 +8,21 @@ import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 export class SignInPage {
   email: string;
   password: string;
-  constructor(private af: AngularFire, public platform: Platform) {}
+  constructor(private auth: AuthService) {}
 
   fb(){
-    this.af.auth.login({
-      provider: AuthProviders.Facebook,
-      method: AuthMethods.Popup,
-    })
+    this.auth.loginWithFacebook();
   }
 
   gp(){
-    this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup,
-    })
+    this.auth.loginWithGoogle();
   }
 
   tw(){
-    this.af.auth.login({
-      provider: AuthProviders.Twitter,
-      method: AuthMethods.Popup,
-    })
+    this.auth.loginWithTwitter();
   }
 
   withEmail(){
-    this.af.auth.login({
-      email: this.email,
-      password: this.password
-    })
+    this.auth.loginWithEmail(this.email,this.password);
   }
 }

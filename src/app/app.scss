@@ -13,7 +13,11 @@
     ion-backdrop{
       display: none !important;
     }
+
+
   }
+
+
 
   ion-menu{
     width: $menu-width;
@@ -21,6 +25,10 @@
 
   .menu + .main-nav{
     left: $menu-width;
+
+    & > .ion-page{
+      width: calc(100% - #{$menu-width}) !important;
+    }
   }
 
   button[menuToggle]{

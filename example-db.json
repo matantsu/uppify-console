@@ -1,0 +1,85 @@
+{
+  // this is where all app data is stored
+  "apps":{
+    "uid1":{
+      // this contains some readonly data for the business.
+      // it is read for business and users, can only be written to by a privileged user.
+      "info":{
+        "statistics":{
+          "numberOfUsers":5
+          //...
+          //some statistics data
+        },
+        "ios":{
+          "status": "active",
+          "url": "http://apple.store.com/?something=something"
+        },
+        "android":{
+          "status": "active",
+          "url": "http://play.store.com/?something=something"
+        },
+        "windows":{
+          "status": "error",
+          "message": "we could not upload the app due to technical problems",
+          "url": "http://windows.store.com/?something=something"
+        },
+        "web":{
+          "status": "active",
+          "url": "http://uppify.com/uid1"
+        }
+      },
+
+      // this is the customization of the app defined by the business owner
+      // it is read/write for business, only read for user.
+      "definition":{
+        "name": "zer4u",
+        "products":{
+          "silk":{
+            "price": 9.15
+          }
+        }
+      },
+
+      // this is data that is between the user and the business such as his profile, orders, purchases etc...
+      "interactions":{
+        // this is read/write for business, read/write for `uid1234`, none for everyone else.
+        "uid1234":{
+          "account":{
+            "name": "moshe",
+            "address": "ha-notrim 32"
+          },
+          "orders":{
+            "order1":{
+              "product":"silk"
+            },
+            "order2":{
+              "product":"silk"
+            }
+          }
+        },
+
+        // private chat with business
+        "chat":{
+          //...
+        }
+      },
+
+      // this is the place for public data such as chat messages between users
+      // read/write for everyone
+      "public":{
+        "chat": {
+          "-Kghdfg34": {
+            "uid": "uid80347",
+            "message": "hi everone"
+          },
+          "-Kghdfg35": {
+            "uid": "uid80347",
+            "message": "hi again"
+          }
+        }
+      }
+    }
+  }
+
+  //there can be other things here such as categories, etc...
+}
