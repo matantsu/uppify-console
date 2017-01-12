@@ -8,11 +8,17 @@ import {SetupPage} from "../pages/setup/setup";
 import {DashboardPage} from "../pages/dashboard/dashboard";
 import {BusinessInfoPage} from "../pages/business-info/business-info";
 import 'rxjs/Rx';
-import {Observable} from "rxjs/Rx";
+import {Observable, Subscription} from "rxjs/Rx";
 import {AuthService, User} from "../bl/auth-service";
 import {AppService} from "../bl/app-service";
 import {ConnectivityService} from "../bl/connectivity-service";
 import {NoConnectionPage} from "../pages/no-connection/no-connection";
+import {SetupService} from "../bl/setup-service";
+import {AppAndWebsitePage} from "../pages/app-and-website/app-and-website";
+import {ProductsAndServicesPage} from "../pages/products-and-services/products-and-services";
+import {GalleryPage} from "../pages/gallery/gallery";
+import {SocialNetworksPage} from "../pages/social-networks/social-networks";
+import {StatisticsPage} from "../pages/statistics/statistics";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,9 +31,21 @@ export class UppifyConsole implements AfterViewInit{
 
   DashboardPage = DashboardPage;
   BusinessInfoPage = BusinessInfoPage;
-  private loading;
+  AppAndWebsitePage = AppAndWebsitePage;
+  ProductsAndServicesPage = ProductsAndServicesPage;
+  GalleryPage = GalleryPage;
+  SocialNetworksPage = SocialNetworksPage;
+  StatisticsPage = StatisticsPage;
 
-  constructor(private authService: AuthService, private af: AngularFire, private platform: Platform,public loadingCtrl: LoadingController, private connectivityService: ConnectivityService) {
+  private loading;
+  private sub: Subscription;
+
+  constructor(private authService: AuthService,
+              private af: AngularFire,
+              private platform: Platform,
+              public loadingCtrl: LoadingController,
+              private connectivityService: ConnectivityService,
+              private setupService: SetupService) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
@@ -40,10 +58,22 @@ export class UppifyConsole implements AfterViewInit{
     });
     this.loading.present();
 
-    this.connectivityService.onConnectionStatusChanged()
+    this.subscribe();
+  }
+
+  subscribe(){
+    this.sub = this.connectivityService.onConnectionStatusChanged()
       .flatMap(connection=>{
         if(connection)
-          return this.authService.changes().map(user=>user ? DashboardPage : SignInPage);
+          return this.authService.changes()
+            .do(user=>this.currentUser = user)
+            .flatMap(user=>{
+              if(user)
+                return this.setupService.isFinished()
+                  .map(b=> b ? DashboardPage : SetupPage);
+              else
+                return Observable.of(SignInPage);
+            });
         else
           return Observable.of(NoConnectionPage);
       })
@@ -51,7 +81,12 @@ export class UppifyConsole implements AfterViewInit{
   }
 
   logout(){
+    this.sub.unsubscribe();
     this.authService.logout();
+    this.navigate(SignInPage)
+      .then(p=>{
+        this.subscribe();
+      });
   }
 
   navigate(page){
@@ -61,8 +96,10 @@ export class UppifyConsole implements AfterViewInit{
     }
     if(this.nav.getActive().component != page){
       this.nav.popToRoot();
-      this.nav.push(page);
+      return this.nav.push(page);
     }
+    else
+      return Promise.resolve(page);
   }
 
   isMenuEnabled(){

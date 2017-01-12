@@ -1,0 +1,72 @@
+upload-image{
+  display: block;
+
+  .root{
+    position: relative;
+    overflow: hidden;
+    background-color: #eeeeee;
+
+    .center{
+      pointer-events: none;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    img{
+      width: 100%;
+      position: absolute;
+      top:0;
+      left:0;
+    }
+    input {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .overlay{
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      padding:0;
+      margin:0;
+    }
+
+    .toolbar{
+      pointer-events: none;
+      color: #eeeeee;
+      -webkit-transition: all 500ms ease;
+      -moz-transition: all 500ms ease;
+      -ms-transition: all 500ms ease;
+      -o-transition: all 500ms ease;
+      transition: all 500ms ease;
+
+      display: block;
+      position: absolute;
+      bottom: 0;
+      right:0;
+      background-color: rgba(0,0,0,.5);
+
+      [ion-button]{
+        pointer-events: all;
+      }
+
+      .uploading-overlay{
+        position: relative;
+        width: 100%;
+      }
+    }
+
+    &.fileOver [ion-button]{
+      pointer-events: none;
+    }
+  }
+}

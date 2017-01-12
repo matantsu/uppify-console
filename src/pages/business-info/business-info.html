@@ -9,14 +9,115 @@
 
 <ion-content padding>
   <form [formGroup]="form" (ngSubmit)="save()">
-    <ion-item>
-      <ion-label>Todo</ion-label>
-      <ion-input type="text" formControlName="title"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Description</ion-label>
-      <ion-textarea formControlName="description"></ion-textarea>
-    </ion-item>
-    <button ion-button type="submit" [disabled]="!form.valid">{{saving ? 'Saving ...' : 'Submit'}}</button>
+    <ion-grid>
+      <ion-row wrap>
+        <ion-col>
+          <ion-card>
+            <br>
+            <ion-title>Business info</ion-title>
+            <ion-item>
+              <ion-label>Business name</ion-label>
+              <ion-input type="text" formControlName="name" placeholder="eg: zer4u"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Slogan/catch phrase</ion-label>
+              <ion-input type="text" formControlName="slogan" placeholder="eg: we have a zer for anyone !"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Short description ({{(150 - form.value.shortDesc.length) > 0 ? (150 - form.value.shortDesc.length) + ' left' : 'Too long !'}})</ion-label>
+              <ion-textarea type="text" formControlName="shortDesc" placeholder="what makes your business unique ?"></ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Full description ({{(4000 - form.value.desc.length) > 0 ? (4000 - form.value.desc.length) + ' left' : 'Too long !'}})</ion-label>
+              <ion-textarea type="text" formControlName="desc" placeholder="what is your added value ?"></ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-label>Address</ion-label>
+              <ion-input type="text" formControlName="address" placeholder="eg: Ha-Oren 23"></ion-input>
+            </ion-item>
+            <br>
+            <br>
+            <ion-title>Opening hours</ion-title>
+            <ion-grid>
+              <ion-row wrap *ngFor="let h of info.openingHours">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Day</ion-label>
+                    <ion-select [(ngModel)]="h.day" [ngModelOptions]="{standalone: true}">
+                      <ion-option value="0" selected="true">Sun</ion-option>
+                      <ion-option value="1">Mon</ion-option>
+                      <ion-option value="2">Tue</ion-option>
+                      <ion-option value="3">Wed</ion-option>
+                      <ion-option value="4">Thu</ion-option>
+                      <ion-option value="5">Fri</ion-option>
+                      <ion-option value="6">Sat</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Open</ion-label>
+                    <ion-datetime displayFormat="HH:mm" [(ngModel)]="h.start" [ngModelOptions]="{standalone: true}"></ion-datetime>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Close</ion-label>
+                    <ion-datetime displayFormat="HH:mm" [(ngModel)]="h.end" [ngModelOptions]="{standalone: true}"></ion-datetime>
+                  </ion-item>
+                </ion-col>
+                <ion-col style="flex: 0 0 13% !important;clear:both">
+                  <ion-item>
+                    <button ion-button small round icon-only color="danger" (click)="removeHour(h)">
+                      <ion-icon name="trash"></ion-icon>
+                    </button>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-buttons text-center>
+              <button ion-button icon-left (click)="addHour()">
+                <ion-icon name="add"></ion-icon>
+                Add
+              </button>
+            </ion-buttons>
+
+
+            <br>
+            <br>
+            <ion-title>Contact info</ion-title>
+            <ion-item>
+              <ion-label>Your name</ion-label>
+              <ion-input type="text" formControlName="contactName" placeholder="John Doe"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="text" formControlName="contactEmail" placeholder="johndoe@domain.com"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Phone</ion-label>
+              <ion-input type="text" formControlName="contactPhone" placeholder="058-4451671"></ion-input>
+            </ion-item>
+
+            <ion-buttons end>
+              <button ion-button end type="submit" [disabled]="!form.valid">
+                {{saving ? 'Saving ...' : 'Save'}}
+              </button>
+            </ion-buttons>
+          </ion-card>
+        </ion-col>
+        <ion-col width-20 style="min-width: 300px">
+          <ion-card-title>Logo</ion-card-title>
+          <upload-image [ref]="logoRef" [aspectRatio]="1"></upload-image>
+
+          <br>
+          <br>
+          <ion-card-title>Cover photo</ion-card-title>
+          <upload-image [ref]="coverPhotoRef"></upload-image>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </form>
+
 </ion-content>

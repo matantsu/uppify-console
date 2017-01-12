@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {Platform} from "ionic-angular/index";
 import {AngularFire, FirebaseApp} from "angularfire2/index";
+import {SetupService} from "../../bl/setup-service";
 
 @Component({
   selector: 'page-setup',
@@ -14,7 +15,7 @@ export class SetupPage {
   styling: FormGroup;
   private logoStorageRef;
 
-  constructor(@Inject(FirebaseApp) firebase, private formBuilder: FormBuilder,private af: AngularFire, public platform: Platform) {
+  constructor(@Inject(FirebaseApp) firebase, private formBuilder: FormBuilder,private af: AngularFire, public platform: Platform, private setupService: SetupService) {
     let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
     let phoneRegex = /^0\d([\d]{0,1})([-]{0,1})\d{7}$/;
 
@@ -48,6 +49,6 @@ export class SetupPage {
   }
 
   finish(){
-    this.af.database.object('defs/' + this.af.auth.getAuth().uid).set('hello');
+    this.setupService.finish();
   }
 }

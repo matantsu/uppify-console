@@ -8,21 +8,192 @@
 </ion-header>
 
 <ion-content #content padding>
-  <div class="demo-box" padding>
-    <ion-segment [(ngModel)]="platform">
-      <ion-segment-button [value]="'ios'">
-        ios
-      </ion-segment-button>
-      <ion-segment-button [value]="'md'">
-        Android
-      </ion-segment-button>
-      <ion-segment-button [value]="'wp'">
-        Windows
-      </ion-segment-button>
-    </ion-segment>
+  <ion-grid>
+    <ion-row wrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title icon-left>
+              <ion-icon name="desktop"></ion-icon>
+              App & Website
+            </ion-card-title>
+          </ion-card-header>
+          <ion-item>
+            <ion-icon name="logo-apple" item-left></ion-icon>
+            <h2>IOS App store status: active!</h2>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="open"></ion-icon>
+              open
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-icon style="color:#a4c639" name="logo-android" item-left></ion-icon>
+            <h2>Android Play store status: active!</h2>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="open"></ion-icon>
+              open
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-icon style="color:#F35325" name="logo-windows" item-left></ion-icon>
+            <h2>Windows App store status: active!</h2>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="open"></ion-icon>
+              open
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-icon style="color:#1E80AF" name="globe" item-left></ion-icon>
+            <h2>Website status: active!</h2>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="open"></ion-icon>
+              open
+            </button>
+          </ion-item>
+          <ion-item>
+            <button ion-button icon-right clear item-right (click)="navigate(AppAndWebsitePage)">
+              go to app & website
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title icon-left>
+              <ion-icon name="cart"></ion-icon>
+              Products & Services
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>
+              hello
+            </p>
+          </ion-card-content>
+          <ion-item>
+            <button ion-button icon-right clear item-right (click)="navigate(ProductsAndServicesPage)">
+              go to products & services
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title icon-left>
+              <ion-icon name="images"></ion-icon>
+              Gallery
+            </ion-card-title>
+          </ion-card-header>
+          <ion-slides style="width: 300px" text-center>
+            <ion-slide>
+              <img src="http://lorempixel.com/300/300" alt="">
+            </ion-slide>
+            <ion-slide>
+              <img src="http://lorempixel.com/300/300" alt="">
+            </ion-slide>
+            <ion-slide>
+              <img src="http://lorempixel.com/300/300" alt="">
+            </ion-slide>
+          </ion-slides>
 
-    <div class="demo" [ngClass]="platform">
-      <uppify-app></uppify-app>
-    </div>
-  </div>
+          <ion-item>
+            <button ion-button icon-right clear item-right (click)="navigate(GalleryPage)">
+              go to gallery
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title icon-left>
+              <ion-icon name="share"></ion-icon>
+              Social
+            </ion-card-title>
+          </ion-card-header>
+          <ion-item>
+            <ion-icon style="color:#3B5998" name="logo-facebook" item-left></ion-icon>
+            <h2>facebook status: connected!</h2>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="open"></ion-icon>
+              open
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-icon style="color:#8a3ab9" name="logo-instagram" item-left></ion-icon>
+            <h2>instagram status: connected!</h2>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="open"></ion-icon>
+              open
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-icon style="color:#00aced" name="logo-twitter" item-left></ion-icon>
+            <h2>twitter status: connected!</h2>
+            <button ion-button icon-left clear item-right>
+              <ion-icon name="open"></ion-icon>
+              open
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-textarea type="text" placeholder="Post to social networks !"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <p item-left>
+              tip: Lorem ipsum dolor sit amet.
+            </p>
+            <button ion-button icon-right item-right>
+              Post!
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
+          <ion-item>
+            <button ion-button icon-right clear item-right (click)="navigate(SocialNetworksPage)">
+              go to social
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title icon-left>
+              <ion-icon name="trending-up"></ion-icon>
+              Statistics
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>
+              hello
+            </p>
+          </ion-card-content>
+          <ion-item>
+            <button ion-button icon-right clear item-right (click)="navigate(StatisticsPage)">
+              go to statistics
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title icon-left>
+              <ion-icon name="briefcase"></ion-icon>
+              Business card
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>
+              hello
+            </p>
+          </ion-card-content>
+          <ion-item>
+            <button ion-button icon-right clear item-right (click)="navigate(BusinessInfoPage)">
+              go to business info
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

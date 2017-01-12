@@ -6,50 +6,46 @@
   </ion-header>
   <ion-content>
     <ion-list>
-        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
-          <ion-icon name="home"></ion-icon>
-          Dashboard
-        </button>
-      <ion-list-header>
-        Manage
-      </ion-list-header>
-        <button ion-item icon-left (click)="navigate(BusinessInfoPage)" menuClose [disabled]="nav?.getActive()?.component == BusinessInfoPage">
-          <ion-icon name="information-circle"></ion-icon>
-          Business Info
-        </button>
-        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
-          <ion-icon name="brush"></ion-icon>
-          Theme & Styling
-        </button>
-      <ion-list-header>
-        Grow
-      </ion-list-header>
-        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
-          <ion-icon name="paper"></ion-icon>
-          Feed
-        </button>
-      <ion-list-header>
-        Earn
-      </ion-list-header>
-        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
-          <ion-icon name="cart"></ion-icon>
-          Products
-        </button>
-        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
-          <ion-icon name="briefcase"></ion-icon>
-          Services
-        </button>
-        <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
-          <ion-icon name="trending-up"></ion-icon>
-          Sales
-        </button>
+      <button ion-item icon-left (click)="navigate(DashboardPage)" menuClose [disabled]="nav?.getActive()?.component == DashboardPage">
+        <ion-icon name="home"></ion-icon>
+        Dashboard
+      </button>
+      <button ion-item icon-left (click)="navigate(BusinessInfoPage)" menuClose [disabled]="nav?.getActive()?.component == BusinessInfoPage">
+        <ion-icon name="briefcase"></ion-icon>
+        Business Info
+      </button>
+      <button ion-item icon-left (click)="navigate(AppAndWebsitePage)" menuClose [disabled]="nav?.getActive()?.component == AppAndWebsitePage">
+        <ion-icon name="desktop"></ion-icon>
+        App & Website
+      </button>
+      <button ion-item icon-left (click)="navigate(ProductsAndServicesPage)" menuClose [disabled]="nav?.getActive()?.component == ProductsAndServicesPage">
+        <ion-icon name="cart"></ion-icon>
+        Products & Services
+      </button>
+      <button ion-item icon-left (click)="navigate(GalleryPage)" menuClose [disabled]="nav?.getActive()?.component == GalleryPage">
+        <ion-icon name="images"></ion-icon>
+        Gallery
+      </button>
+      <button ion-item icon-left (click)="navigate(SocialNetworksPage)" menuClose [disabled]="nav?.getActive()?.component == SocialNetworksPage">
+        <ion-icon name="share"></ion-icon>
+        Social Networks
+      </button>
+      <button ion-item icon-left (click)="navigate(StatisticsPage)" menuClose [disabled]="nav?.getActive()?.component == StatisticsPage">
+        <ion-icon name="trending-up"></ion-icon>
+        Statistics
+      </button>
 
-      <ion-item (click)="logout()">
+      <ion-item>
         <ion-avatar item-left>
           <img [src]="currentUser?.photoUrl">
         </ion-avatar>
         <h2>{{currentUser?.displayName}}</h2>
         <p>{{currentUser?.email}}</p>
+      </ion-item>
+      <ion-item>
+        <button ion-button item-right (click)="logout()">
+          Logout
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>

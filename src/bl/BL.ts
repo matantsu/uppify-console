@@ -5,6 +5,7 @@ import {BusinessInfoManager} from "./business-info";
 import {AppService} from "./app-service";
 import {BusinessInfoService} from "./business-info-service";
 import {ConnectivityService} from "./connectivity-service";
+import {SetupService} from "./setup-service";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBHhdmRW6FaUGvYYlWThvF9Dz7muvmECmI",
@@ -26,8 +27,9 @@ const myFirebaseAuthConfig = {
   providers:[
     AuthService,
     BusinessInfoService,
+    ConnectivityService,
+    SetupService,
     {provide: User, useFactory: (authService: AuthService)=>authService.getUser(), deps:[AuthService]},
-    ConnectivityService
   ],
   exports:[
     AngularFireModule,
